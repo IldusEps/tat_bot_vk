@@ -56,7 +56,7 @@ def text(query, bot):
 
                 translation = re.sub(
                     r"<\/?[^uiba\/]*?>|<\/?[^a\/](.*?(?<=a))>", "", translation)
-                mess = f"Перевел  <u>{"с татарского🟢" if e < tat_count else "с русского🇷🇺"}</u>\n<b>{words[0]["word"]}</b> \n{translation}"
+                mess = f"Перевел  <u>{'с татарского🟢' if e < tat_count else 'с русского🇷🇺'}</u>\n<b>{words[0]["word"]}</b> \n{translation}"
                 inline_words.append(types.InlineQueryResultArticle(
                     id=user_id+e, title=word["word"],
                     description=("с татарского🟢 " if e < tat_count else "с русского🇷🇺 ") + re.sub(
