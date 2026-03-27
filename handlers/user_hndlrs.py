@@ -62,7 +62,7 @@ def change_lang(bot, lang, user_id):
 
     user.set_lang(not (lang), user_id)
 
-    bot.send_message(user_id, f"Язык: \n{"*с русского* на татарский" if not (lang) else "*с татарского* на русский"}",
+    bot.send_message(user_id, f"Язык: \n{'*с русского* на татарский' if not (lang) else '*с татарского* на русский'}",
                      keyboard=mainKeyboard(user_id), parse_mode='MarkdownV2')
 
 
@@ -84,7 +84,7 @@ def report_step_2(bot, message):
         logging.info("Назад | user: %s" % (str(user_id),))
 
         bot.send_message(
-            user_id, f"Язык: \n{"*с русского* на татарский" if lang else "*с татарского* на русский"}", keyboard=mainKeyboard(message), parse_mode="Markdown")
+            user_id, f"Язык: \n{'*с русского* на татарский' if lang else '*с татарского* на русский'}", keyboard=mainKeyboard(message), parse_mode="Markdown")
     else:
         bot.send_message(
             user_id, "Ваше сообщение отправлено разработчику!\nОн ответит вам в ближайшее время.", keyboard=mainKeyboard(message))

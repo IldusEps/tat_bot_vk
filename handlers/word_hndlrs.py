@@ -39,8 +39,8 @@ def send_word(bot, words, user_id, lang, word=""):
 
         translation = re.sub(
             r"<\/?[^uiba\/]*?>|<\/?[^a\/](.*?(?<=a))>", "", translation)
-        word_id = f"(id=[{words[0]["id"]}](http://217.114.6.216:3001/?id={words[0]["id"]}))" if user_id in ADMINS else ""
-        mess = f"Перевел  <u>{"с татарского🟢" if not (lang) else "с русского🇷🇺"}</u>\n\n<b>{words[0]["word"]}</b> {word_id}\n\n{translation}"
+        word_id = f"(id=[{words[0]['id']}](http://217.114.6.216:3001/?id={words[0]['id']}))" if user_id in ADMINS else ""
+        mess = f"Перевел  <u>{'с татарского🟢' if not (lang) else 'с русского🇷🇺'}</u>\n\n<b>{words[0]['word']}</b> {word_id}\n\n{translation}"
         if len(mess) < 4096:
             bot.send_message( user_id, mess, parse_mode='HTML')#, keyboard=keyboard,
         else:
@@ -71,7 +71,7 @@ def send_word(bot, words, user_id, lang, word=""):
             # inl_keyboard.add(types.InlineKeyboardButton(
             #     "Сменить язык и найти", callback_data="Change_lang_" + word))
         bot.send_message(user_id,
-                         f"*Слово не найдено!*\nВводите слово в *именительном падеже, первом лице*.\nПопробуйте сменить язык.\n\nЯзык: {"с татарского🟢" if not (lang) else "с русского🇷🇺"}", )
+                         f"*Слово не найдено!*\nВводите слово в *именительном падеже, первом лице*.\nПопробуйте сменить язык.\n\nЯзык: {'с татарского🟢' if not (lang) else 'с русского🇷🇺'}", )
         #keyboard=inl_keyboard, parse_mode="Markdown")
 
 # handlers
@@ -94,7 +94,7 @@ def get_word(bot, message, random=False):
 
         send_word(bot, words, user_id, lang, word)
 
-        admin_message = f"Пользователь {username} ищет слово {"с татарского🟢" if not (lang) else "с русского🇷🇺"}: \n{word}\nКол-во найденных слов: {len(words)}"
+        admin_message = f"Пользователь {username} ищет слово {'с татарского🟢' if not (lang) else 'с русского🇷🇺'}: \n{word}\nКол-во найденных слов: {len(words)}"
     else:
         logging.info("Ошибка ввода user: %s" % (str(user_id),))
 
