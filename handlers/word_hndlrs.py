@@ -40,19 +40,19 @@ def send_word(bot, words, user_id, lang, word=""):
         translation = re.sub(
             r"<\/?[^uiba\/]*?>|<\/?[^a\/](.*?(?<=a))>", "", translation)
         word_id = f"(id=[{words[0]["id"]}](http://217.114.6.216:3001/?id={words[0]["id"]}))" if user_id in ADMINS else ""
-        mess = f"Перевел  <u>{"с татарского🟢" if not (lang) else "с русского🇷🇺"}</u>\n<b>{words[0]["word"]}</b> {word_id}\n{translation}"
+        mess = f"Перевел  <u>{"с татарского🟢" if not (lang) else "с русского🇷🇺"}</u>\n\n<b>{words[0]["word"]}</b> {word_id}\n\n{translation}"
         if len(mess) < 4096:
-            bot.send_message( user_id, mess)#, keyboard=keyboard, parse_mode='HTML')
+            bot.send_message( user_id, mess, parse_mode='HTML')#, keyboard=keyboard,
         else:
             matches = re.finditer(
                 r"[\s\S]{1,3900}(\n|$)", mess, re.MULTILINE)
             for matchNum, match in enumerate(matches):
                 if matchNum != 0:
                     bot.send_message( 
-                        user_id, f"<blockquote expandable>{match.group(0)}</blockquote>")#, keyboard=keyboard, parse_mode='HTML')
+                        user_id, f"<blockquote expandable>{match.group(0)}</blockquote>", parse_mode='HTML')#, keyboard=keyboard, parse_mode='HTML')
                 else:
                     bot.send_message(
-                        user_id, match.group(0))#, keyboard=keyboard, parse_mode='HTML')
+                        user_id, match.group(0), parse_mode='HTML')#, keyboard=keyboard, parse_mode='HTML')
         if len(words) > 1:
             perhaps_words = ""
             # inl_keyboard = NewInlineKeyboard()

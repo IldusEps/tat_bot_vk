@@ -14,31 +14,31 @@ connection, cursor = connect.get_connection_cursor()
 @lru_cache(maxsize=1)
 def check_day(day):
     cursor.execute(
-        'SELECT count FROM analytics_days WHERE day = DATE(NOW())')
+        'SELECT count FROM vk_analytics_days WHERE day = DATE(NOW())')
     res = cursor.fetchall()
     if res == []:
         cursor.execute(
-            'INSERT INTO analytics_days (count, day) VALUES(0, DATE(NOW()))')
+            'INSERT INTO vk_analytics_days (count, day) VALUES(0, DATE(NOW()))')
         connection.commit()
     return True
 
 
 def add_analytics(word_id):
     cursor.execute(
-        'SELECT count FROM analytics WHERE word_id = %s', (word_id,))
+        'SELECT count FROM vk_analytics WHERE word_id = %s', (word_id,))
     res1 = cursor.fetchall()
     if res1 == []:
         cursor.execute(
-            'INSERT INTO analytics (word_id) VALUES(%s)', (word_id,))
+            'INSERT INTO vk_analytics (word_id) VALUES(%s)', (word_id,))
         connection.commit()
     else:
         cursor.execute(
-            'UPDATE analytics SET count = count + 1 WHERE word_id = %s', (word_id,))
+            'UPDATE vk_analytics SET count = count + 1 WHERE word_id = %s', (word_id,))
         connection.commit()
 
     if check_day(date.today()):
         cursor.execute(
-            'UPDATE analytics_days SET count = count + 1 WHERE day = DATE(NOW())')
+            'UPDATE vk_analytics_days SET count = count + 1 WHERE day = DATE(NOW())')
         connection.commit()
 
 
@@ -54,12 +54,12 @@ def get_count_users():
 def statistics_query(word: bool = False):
     if word:
         cursor.execute(
-            'SELECT w.word, count FROM analytics as analt JOIN Words2 as w ON analt.word_id = w.id ORDER BY analt.count DESC LIMIT 30')
+            'SELECT w.word, count FROM vk_analytics as analt JOIN Words2 as w ON analt.word_id = w.id ORDER BY analt.count DESC LIMIT 30')
         words = cursor.fetchall()
         return words
     else:
         cursor.execute(
-            'SELECT count FROM analytics_days WHERE day = DATE(NOW())')
+            'SELECT count FROM vk_analytics_days WHERE day = DATE(NOW())')
         count_day = cursor.fetchall()
         count_day = str(count_day[0][0]) if count_day != [] else "0"
 

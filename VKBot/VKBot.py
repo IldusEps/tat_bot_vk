@@ -1,5 +1,8 @@
 import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
+import random
+
+from VKBot import convert
 
 class Bot:
     def __init__(self, token, api_version, handle_default = False):
@@ -19,11 +22,16 @@ class Bot:
         
     def send_message(self, user_id, message, keyboard=None, parse_mode=''):
         """Отправка сообщения"""
+        if parse_mode == 'Markdown':
+            message = convert.simple_markdown_to_vk(message)
+        elif parse_mode == 'HTML':
+            message = convert.html_to_vk(message)
+        message = convert.remove_vk_formatting(message)
         try:
             params = {
                 "user_id": user_id,
                 "message": message,
-                "random_id": 0
+                "random_id": random.randint(1, 10**9)
             }
             if keyboard:
                 params["keyboard"] = keyboard.get_keyboard()

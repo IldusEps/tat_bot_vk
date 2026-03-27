@@ -36,7 +36,7 @@ def start(bot,message):
     lang = user.get_lang(bot, message, user_name = username)
 
     username = f"@{username}" if isinstance(username, str) else str(message.user_id)
-    user.set_lang(False, message.user_id)
+    user.set_lang(True, message.user_id)
 
     count = analytics.get_count_users()
     admin_message = "Новый пользователь " + \
@@ -51,12 +51,9 @@ def start(bot,message):
     except:
         pass
 
-    bot.send_message(message.user_id, "Привет ✌️ \nЯ твой <b>личный словарь</b> с татарского на русский язык и наоборот\n\nСейчас у тебя включен <b>Язык</b>: \n   🟢<u>с татарского</u>  на русский\n\n<b>Напиши слово</b>, которое ты хочешь перевести!\n\nТакже ты можешь спрашивать у меня перевод в любом чате, просто введи <b>@tatarcha_translate_bot</b> *Свое слово*",keyboard=mainKeyboard(message))
-    bot.send_message(message.user_id, "Подписывайтесь на наш <b>канал по изучению татарского языка @jitmesh_chakrim</b>!", keyboard=mainKeyboard(message))
-    # bot.send_message(
-    #     message.user_id, "Пожалуйста, укажите, где вы нашли бота", keyboard=StartKeyboard)
-    # bot.send_message(
-    #     message.user_id, "Пожалуйста, укажите, где вы нашли бота", keyboard=StartKeyboard)
+    word_hndlrs.get_word(bot, message)
+    # bot.send_message(message.user_id, "Привет ✌️ \nЯ твой <b>личный словарь</b> с татарского на русский язык и наоборот\n\nСейчас у тебя включен <b>Язык</b>: \n   🟢<u>с татарского</u>  на русский\n\n<b>Напиши слово</b>, которое ты хочешь перевести!\n\nТакже ты можешь спрашивать у меня перевод в любом чате, просто введи <b>@tatarcha_translate_bot</b> *Свое слово*",keyboard=mainKeyboard(message), parse_mode="HTML")
+    bot.send_message(message.user_id, "Подписывайтесь на наш <b>канал по изучению татарского языка https://t.me/jitmesh_chakrim</b>!", keyboard=mainKeyboard(message), parse_mode="HTML")
 
 
 def change_lang(bot, lang, user_id):
