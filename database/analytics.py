@@ -93,7 +93,7 @@ def get_statistics(view=0):  # start=0,
                 else:
                     username = "@" + username
                 rows.append(
-                    f"{username} - <u>{user[1]}</u> - {user[2].strftime("%d.%B.%Y %H:%M")} - {user[3]}")
+                    f"{username} - <u>{user[1]}</u> - {user[2].strftime('%d.%B.%Y %H:%M')} - {user[3]}")
 
             return "\n".join(rows)
 
