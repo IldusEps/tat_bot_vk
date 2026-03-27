@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 
 from database import user
-from handlers import admin_hndlrs, inline_mode, user_hndlrs, word_hndlrs
+from handlers import admin_hndlrs,  user_hndlrs, word_hndlrs
 from VKBot.VKBot import Bot
 import keyboards
 
